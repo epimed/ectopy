@@ -62,9 +62,8 @@ class NSampleThreshold(Threshold):
     def calculate_threshold(self, ascending=True) -> pd.Series:
         threshold = pd.Series(index=self.data.columns, dtype=float)
         for col in self.data.columns:
-            threshold[col] = self.data[col].sort_values(axis=0, ascending=ascending).head(self._nb_samples).tail(1)
+            threshold[col] = self.data[col].sort_values(axis=0, ascending=ascending).iloc[self._nb_samples-1]
         return threshold
-
 
 class NoiseThreshold(Threshold):
     
